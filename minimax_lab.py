@@ -30,9 +30,13 @@ def mostrar_tablero(juego):
         for c in range(juego["columnas"]):
             juego["tablero"][f][c] = "-"
 
-#Agrego a los jugadores al tablero
-gato_fila, gato_columna = juego["gato"]
-raton_fila, raton_columna = juego["raton"]
-juego["tablero"][gato_fila][gato_columna] = "G"
-juego["tablero"][raton_fila][raton_columna] = "R"
+    #Agrego a los jugadores al tablero
+    gato_fila, gato_columna = juego["gato"]
+    raton_fila, raton_columna = juego["raton"]
+    juego["tablero"][gato_fila][gato_columna] = "G"
+    juego["tablero"][raton_fila][raton_columna] = "R"
 
+    # Se imprime el tablero
+    print("\--Minimax Raton y Gato IA--")
+    for fila in juego["tablero"]:
+        print("|".join(fila))   #Aqui utilizo el separador de fila y columna
