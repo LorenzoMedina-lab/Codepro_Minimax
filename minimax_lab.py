@@ -19,15 +19,20 @@ def iniciar_juego(filas,columnas):
         "filas":filas,
         "columnas": columnas,
         "raton": [filas -1, columnas -1],  #P.del raton esquina inferior derecha
-        "gato": [0,0],                    #P del gaton esquina superior izquierda
+        "gato": [0,0],                    #P del gato esquina superior izquierda
         "tablero": matriz_tablero
     }
 
 # Esta funcion muestra mi tablero
 
-def mostrar_tablero(matriz):
-    for fila in matriz:
-        print("|".join(fila))
+def mostrar_tablero(juego):
+    for f in range(juego["filas"]):
+        for c in range(juego["columnas"]):
+            juego["tablero"][f][c] = "-"
 
-mi_tablero = crear_tablero(5, 5)
-mostrar_tablero(mi_tablero)
+#Agrego a los jugadores al tablero
+gato_fila, gato_columna = juego["gato"]
+raton_fila, raton_columna = juego["raton"]
+juego["tablero"][gato_fila][gato_columna] = "G"
+juego["tablero"][raton_fila][raton_columna] = "R"
+
