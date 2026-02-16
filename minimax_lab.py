@@ -28,7 +28,7 @@ def iniciar_juego(filas,columnas):
 def mostrar_tablero(juego):
     for f in range(juego["filas"]):
         for c in range(juego["columnas"]):
-            juego["tablero"][f][c] = "-"
+            juego["tablero"][f][c] = "-"        #Bucle anidado
 
     #Agrego a los jugadores al tablero
     gato_fila, gato_columna = juego["gato"]
@@ -40,3 +40,12 @@ def mostrar_tablero(juego):
     print("\--Minimax Raton y Gato IA--")
     for fila in juego["tablero"]:
         print("|".join(fila))   #Aqui utilizo el separador de fila y columna
+    print("-" * (juego["columnas"] *2))
+
+    # Movimiento 
+    def movimiento_jugadores(juego, personaje, direccion):
+        #Verifica el moviento para evitar que choque con los limetes del tablero
+        if personaje == "raton":
+            pos = juego["raton"]
+        else:
+            pos = juego["gato"]
