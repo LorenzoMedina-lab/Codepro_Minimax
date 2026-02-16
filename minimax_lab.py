@@ -49,3 +49,20 @@ def mostrar_tablero(juego):
             pos = juego["raton"]
         else:
             pos = juego["gato"]
+    #calculo la nueva posicion 
+    nueva_fila, nueva_columna = pos[0], pos[1]
+
+    if direccion == "arriba": nueva_fila =+ 1
+    elif direccion == "abajo": nueva_fila += 1
+    elif direccion == "izquierda": nueva_columna -= 1
+    elif direccion == "derecha": nueva_columna += 1
+#Verifica que no salga del mapa
+    if 0 <= nueva_fila < juego["filas"] and 0 <= nueva_columna < juego["columnas"]:
+        #Si el movimiento es valido, actualiza la posicion actual
+        if personaje == "raton":
+            juego["raton"] = [nueva_fila, nueva_columna]
+        else:
+            juego["gato"] = [nueva_fila, nueva_columna]
+        return True # Movimiento correcto
+    
+    return False # Movimiento fallido 
