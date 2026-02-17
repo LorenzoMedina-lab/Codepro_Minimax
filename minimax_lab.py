@@ -86,7 +86,7 @@ def minimax(juego, profundidad, es_turno_raton):    #Caso Base
             copia = copy.deepcopy(juego)   #Se crea un universo paralelo
             if movimiento_jugadores(copia, "raton", direc):
                 #Analiza si me muevo aqui, que hara el gato despues
-                valor = minimax(copia, profundidad -1 False)
+                valor = minimax(copia, profundidad -1, False)
                 mejor_valor = max(mejor_valor, valor)
         return mejor_valor
 
@@ -100,3 +100,16 @@ def minimax(juego, profundidad, es_turno_raton):    #Caso Base
                 mejor_valor = min(mejor_valor, valor)
         return mejor_valor
     
+def pensar_movimiento_raton(juego):
+    mejor_valor = -float(inf)
+    mejor_dir = random.choice["arriba", "abajo","izquierda","derecha"]:
+
+    for direc in ["arriba", "abajo", "izquierda", "derecha"]:
+        copia = copy.deepcopy(juego)
+        if movimiento_jugadores(copia, "raton", direc):
+            valor = minimax(copia, 3 , False)
+            if valor > mejor_valor:
+                mejor_valor = valor
+                mejor_dir = direc
+    return mejor_dir
+
