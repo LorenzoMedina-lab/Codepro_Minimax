@@ -113,3 +113,29 @@ def pensar_movimiento_raton(juego):
                 mejor_dir = direc
     return mejor_dir
 
+# Bucle Principal
+if __name__ == "__main__":
+    iniciar_partida = inicializar_juego(5,5)
+
+    print("Comienza la batalla de esquizofrenicos")
+    mostrar_tablero(iniciar_partida)
+
+    #Aqui se configura la cantidad de turnos 
+    for turno in range(1,26):
+        if iniciar_partida["gato"] == iniciar_partida["raton"]:
+            print(f"¡Atrapado antes de comenzar!")
+            break
+
+    #Turno del raton
+    print(f"turno {turno}: El raton esta calculando su proximo movimiento")
+    dir_raton = pensar_movimiento_raton(iniciar_partida)
+    movimiento_jugadores(iniciar_partida,"raton",dir_raton)
+
+    #Aqui se verifica si el raton off 
+    if iniciar_partida["gato"] == iniciar_partida["raton"]:
+        print("Te regalaste rey, la cena esta en bandeja")
+        mostrar_tablero(iniciar_partida)
+        break
+
+    #Turno del gato
+    print(f"Turno {turno}: El gato esta pensando el movimiento mas letal")
