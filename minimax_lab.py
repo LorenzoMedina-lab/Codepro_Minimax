@@ -101,8 +101,8 @@ def minimax(juego, profundidad, es_turno_raton):    #Caso Base
         return mejor_valor
     
 def pensar_movimiento_raton(juego):
-    mejor_valor = -float(inf)
-    mejor_dir = random.choice["arriba", "abajo","izquierda","derecha"]:
+    mejor_valor = -float("inf")
+    mejor_dir = random.choice(["arriba", "abajo","izquierda","derecha"])
 
     for direc in ["arriba", "abajo", "izquierda", "derecha"]:
         copia = copy.deepcopy(juego)
@@ -113,9 +113,24 @@ def pensar_movimiento_raton(juego):
                 mejor_dir = direc
     return mejor_dir
 
+def pensar_movimiento_gato(juego):
+    """Elige la mejor dirección para el Gato."""
+    mejor_valor = float('inf') 
+    mejor_dir = random.choice(['arriba', 'abajo', 'izquierda', 'derecha'])
+    
+    for direc in ['arriba', 'abajo', 'izquierda', 'derecha']:
+        copia = copy.deepcopy(juego)
+        if mover_pieza(copia, 'gato', direc):
+            # Piensa 3 pasos al futuro
+            valor = minimax(copia, 3, True) 
+            if valor < mejor_valor: # ------- Aquí se busca el menor valor
+                mejor_valor = valor
+                mejor_dir = direc
+    return mejor_dir
+
 # Bucle Principal
 if __name__ == "__main__":
-    iniciar_partida = inicializar_juego(5,5)
+    iniciar_partida = iniciar_juego(5,5)
 
     print("Comienza la batalla de esquizofrenicos")
     mostrar_tablero(iniciar_partida)
@@ -126,16 +141,17 @@ if __name__ == "__main__":
             print(f"¡Atrapado antes de comenzar!")
             break
 
-    #Turno del raton
-    print(f"turno {turno}: El raton esta calculando su proximo movimiento")
-    dir_raton = pensar_movimiento_raton(iniciar_partida)
-    movimiento_jugadores(iniciar_partida,"raton",dir_raton)
+        #Turno del raton
+        print(f"turno {turno}: El raton esta calculando su proximo movimiento")
+        dir_raton = pensar_movimiento_raton(iniciar_partida)
+        movimiento_jugadores(iniciar_partida,"raton",dir_raton)
 
-    #Aqui se verifica si el raton off 
-    if iniciar_partida["gato"] == iniciar_partida["raton"]:
-        print("Te regalaste rey, la cena esta en bandeja")
-        mostrar_tablero(iniciar_partida)
-        break
+        #Aqui se verifica si el raton off 
+        if iniciar_partida["gato"] == iniciar_partida["raton"]:
+            print("Te regalaste rey, la cena esta en bandeja")
+            mostrar_tablero(iniciar_partida)
+            break
 
     #Turno del gato
     print(f"Turno {turno}: El gato esta pensando el movimiento mas letal")
+    dir_gato = pensar
