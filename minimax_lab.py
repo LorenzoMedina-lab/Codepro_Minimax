@@ -114,10 +114,10 @@ def pensar_movimiento_raton(juego):
 
 def pensar_movimiento_gato(juego):
 
-    mejor_valor = float('inf') 
-    mejor_dir = random.choice(['arriba', 'abajo', 'izquierda', 'derecha'])
+    mejor_valor = float("inf") 
+    mejor_dir = random.choice(["arriba", "abajo", "izquierda", "derecha"])
     
-    for direc in ['arriba', 'abajo', 'izquierda', 'derecha']:
+    for direc in ["arriba", "abajo", "izquierda", "derecha"]:
         copia = copy.deepcopy(juego)
         if movimiento_jugadores(copia, 'gato', direc):
             # Piensa 3 pasos al futuro
@@ -129,7 +129,7 @@ def pensar_movimiento_gato(juego):
 
 # Bucle Principal
 if __name__ == "__main__":
-    iniciar_partida = iniciar_juego(8,8)
+    iniciar_partida = iniciar_juego(5,5)
 
     print("Comienza la batalla de esquizofrenicos")
     mostrar_tablero(iniciar_partida)
