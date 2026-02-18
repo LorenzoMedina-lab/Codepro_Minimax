@@ -37,7 +37,7 @@ def mostrar_tablero(juego):
     juego["tablero"][raton_fila][raton_columna] = "R"
 
     # Se imprime el tablero
-    print("\--Minimax Raton y Gato IA--")
+    print("Campo de batalla xd")
     for fila in juego["tablero"]:
         print("|".join(fila))   #Aqui utilizo el separador de fila y columna
         print("-" * (juego["columnas"] *2))
@@ -67,7 +67,6 @@ def movimiento_jugadores(juego, personaje, direccion):
     return False # Movimiento fallido 
 
 # Minimax
-# --- 4. CEREBRO IA (MINIMAX) ---
 def obtener_distancia(juego):
     #Calcula cuántos pasos hay entre el Gato y el Ratón (Manhattan).
     dist_vertical = abs(juego["gato"][0] - juego["raton"][0])
@@ -107,30 +106,30 @@ def pensar_movimiento_raton(juego):
     for direc in ["arriba", "abajo", "izquierda", "derecha"]:
         copia = copy.deepcopy(juego)
         if movimiento_jugadores(copia, "raton", direc):
-            valor = minimax(copia, 3 , False)
+            valor = minimax(copia, 1 , False)
             if valor > mejor_valor:
                 mejor_valor = valor
                 mejor_dir = direc
     return mejor_dir
 
 def pensar_movimiento_gato(juego):
-    """Elige la mejor dirección para el Gato."""
+
     mejor_valor = float('inf') 
     mejor_dir = random.choice(['arriba', 'abajo', 'izquierda', 'derecha'])
     
     for direc in ['arriba', 'abajo', 'izquierda', 'derecha']:
         copia = copy.deepcopy(juego)
-        if mover_pieza(copia, 'gato', direc):
+        if movimiento_jugadores(copia, 'gato', direc):
             # Piensa 3 pasos al futuro
-            valor = minimax(copia, 3, True) 
-            if valor < mejor_valor: # ------- Aquí se busca el menor valor
+            valor = minimax(copia, 4, True) 
+            if valor < mejor_valor: 
                 mejor_valor = valor
                 mejor_dir = direc
     return mejor_dir
 
 # Bucle Principal
 if __name__ == "__main__":
-    iniciar_partida = iniciar_juego(5,5)
+    iniciar_partida = iniciar_juego(8,8)
 
     print("Comienza la batalla de esquizofrenicos")
     mostrar_tablero(iniciar_partida)
@@ -152,6 +151,15 @@ if __name__ == "__main__":
             mostrar_tablero(iniciar_partida)
             break
 
-    #Turno del gato
-    print(f"Turno {turno}: El gato esta pensando el movimiento mas letal")
-    dir_gato = pensar
+        #Turno del gato
+        print(f"Turno {turno}: El gato esta pensando el movimiento mas letal")
+        dir_gato = pensar_movimiento_gato(iniciar_partida)
+        movimiento_jugadores(iniciar_partida, "gato",dir_gato)
+
+        #Muestra como queda el tablero
+        mostrar_tablero(iniciar_partida)
+        if iniciar_partida["gato"] == iniciar_partida["raton"]:
+            print(f"El gato atrapo al raton en el turno {turno}")
+            break
+    else:
+        print("El raton logro escapar")
