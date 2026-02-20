@@ -2,14 +2,8 @@
 import random
 import copy
 # Primero creo el tablero (Matrix)
-def crear_tablero(filas,columnas):
-    tablero = [] #Lista principal contiene el tablero
-
-    for _ in range(filas):
-        fila = [] #Aqui creo una fila vacia para empezar
-        for _ in range(columnas):
-            fila.append("-")  #Aqui agrego el macador a la fila actual
-        tablero.append(fila)
+def crear_tablero(filas,columnas):    #Cambiar por la forma simple
+    tablero = [["-" for _ in range(filas)]for _ in range(columnas)]
     return tablero
 
 #Iniciar juego define el estado inicial del juego
@@ -66,13 +60,13 @@ def movimiento_jugadores(juego, personaje, direccion):
         
     return False # Movimiento fallido 
 
-# Minimax
+
 def obtener_distancia(juego):
     #Calcula cuántos pasos hay entre el Gato y el Ratón (Manhattan).
     dist_vertical = abs(juego["gato"][0] - juego["raton"][0])
     dist_horizontal = abs(juego["gato"][1] - juego["raton"][1])
     return dist_vertical + dist_horizontal
-
+# Minimax
 def minimax(juego, profundidad, es_turno_raton):    #Caso Base
     if profundidad == 0 or juego["gato"] == juego["raton"]:
         return obtener_distancia(juego)
