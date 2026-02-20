@@ -2,8 +2,8 @@
 import random
 import copy
 # Primero creo el tablero (Matrix)
-def crear_tablero(filas,columnas):    #Cambiar por la forma simple
-    tablero = [["-" for _ in range(filas)]for _ in range(columnas)]
+def crear_tablero(filas,columnas):   
+    tablero = [["-" for _ in range(filas)]for _ in range(columnas)]      #For Anidado
     return tablero
 
 #Iniciar juego define el estado inicial del juego
@@ -12,8 +12,8 @@ def iniciar_juego(filas,columnas):
     return {
         "filas":filas,
         "columnas": columnas,
-        "raton": [filas -1, columnas -1],  #P.del raton esquina inferior derecha
-        "gato": [0,0],                    #P del gato esquina superior izquierda
+        "raton": [4,4],  #P.del raton esquina inferior derecha
+        "gato": [0,0],   #P. del gato esquina superior izquierda
         "tablero": matriz_tablero
     }
 
@@ -22,7 +22,7 @@ def iniciar_juego(filas,columnas):
 def mostrar_tablero(juego):
     for f in range(juego["filas"]):
         for c in range(juego["columnas"]):
-            juego["tablero"][f][c] = "-"        #Bucle anidado
+            juego["tablero"][f][c] = "-"       
 
     #Agrego a los jugadores al tablero
     gato_fila, gato_columna = juego["gato"]
@@ -67,8 +67,8 @@ def obtener_distancia(juego):
     dist_horizontal = abs(juego["gato"][1] - juego["raton"][1])
     return dist_vertical + dist_horizontal
 # Minimax
-def minimax(juego, profundidad, es_turno_raton):    #Caso Base
-    if profundidad == 0 or juego["gato"] == juego["raton"]:
+def minimax(juego, profundidad, es_turno_raton):    
+    if profundidad == 0 or juego["gato"] == juego["raton"]:   #Caso Base
         return obtener_distancia(juego)
     
     direcciones = ["arriba", "abajo", "izquierda", "derecha"]
@@ -115,7 +115,7 @@ def pensar_movimiento_gato(juego):
         copia = copy.deepcopy(juego)
         if movimiento_jugadores(copia, 'gato', direc):
             # Piensa 3 pasos al futuro
-            valor = minimax(copia, 4, True) 
+            valor = minimax(copia, 3, True) 
             if valor < mejor_valor: 
                 mejor_valor = valor
                 mejor_dir = direc
